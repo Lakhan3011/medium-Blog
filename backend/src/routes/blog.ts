@@ -20,7 +20,7 @@ blogRouter.use("/*", async (c, next) => {
   // verify the header
   // if header is correct, we proceed
   // if header incorrect, we return the user a 401 status code
-  const jwt = c.req.header("Authorization");
+  const jwt = c.req.header("Authorization") || "";
   if (!jwt) {
     c.status(401);
     return c.json({ error: "Unauthorized" });
@@ -93,8 +93,18 @@ blogRouter.get("/bulk", async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const body = await c.req.json();
-  const blogs = await prisma.post.findMany();
+  const blogs = await prisma.post.findMany({
+    select: {
+      title: true,
+      content: true,
+      id: true,
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
   return c.json({ blogs });
 });
 
