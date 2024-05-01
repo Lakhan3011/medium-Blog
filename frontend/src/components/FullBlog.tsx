@@ -8,13 +8,13 @@ export const FullBLog = ({ blog }: { blog: Blog }) => {
       <Appbar />
       <div className="flex justify-center">
         <div className="grid grid-cols-12 px-28 w-full pt-12 max-w-screen-2xl">
-          <div className="col-span-8 bg-sky-500">
+          <div className="col-span-8">
             <div className="text-5xl font-extrabold pt-2">{blog.title}</div>
             <div className="text-slate-500">Posted on May 1, 2024</div>
             <div className="pt-4">{blog.content}</div>
           </div>
 
-          <div className="col-span-4 bg-red-300">
+          <div className="col-span-4 ">
             <div className="text-lg"> Author</div>
 
             <div className="flex mt-5">
